@@ -13,7 +13,7 @@ jobs:
       # Pipenv でパッケージ管理している場合を想定しています。
       - run: python -m pip install pipenv
       # Pipfile.lock を Git 管理に含めている場合を想定しています。
-      # - run: python -m pipenv sync --dev
+      - run: python -m pipenv sync --dev
       # まず、ビルドします。
       - run: python -m pipenv run mkdocs build
       - uses: peaceiris/actions-gh-pages@v3
