@@ -881,7 +881,6 @@ Multimedia portions depend on GLES portions.
     " h264dec_lib"       - for OMX Media Component H264 Decoder Library
     " h264enc_lib"       - for OMX Media Component H.264 Encoder Library
     " h265dec_lib"       - for OMX Media Component H265 Decoder Library
-    " mpeg2dec_lib"      - for OMX Media Component MPEG2 Decoder Library
     " mpeg4dec_lib"      - for OMX Media Component MPEG4 Decoder Library
     " vc1dec_lib"        - for OMX Media Component VC-1 Decoder Library
     " divxdec_lib"       - for OMX Media Component DivX Decoder Library
