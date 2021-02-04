@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Shankho Boron Ghosh">
+    <link rel="canonical" href="http://docs.automotivelinux.org/2_Architecture_Guides/2.2_Security_Blueprint/7_Connectivity/1.2.7.2_Wireless/">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Wireless - AGL Documentation</title>
+    <link href="../../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Wireless", url: "#_top", children: [
+              {title: "Wifi", url: "#wifi" },
+              {title: "Bluetooth", url: "#bluetooth" },
+              {title: "Cellular", url: "#cellular" },
+              {title: "Radio", url: "#radio" },
+              {title: "NFC", url: "#nfc" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.7.3_Cloud/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.7.3_Cloud/" class="btn btn-xs btn-link">
+        Cloud
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-link">
+        Bus and connectors
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="wireless">Wireless</h1>
+<p>In this part, we talk about possible remote attacks on a car, according to the
+different areas of possible attacks. For each communication channels, we
+describe attacks and how to prevent them with some recommendations. The main
+recommendation is to always follow the latest updates of these remote
+communication channels.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Object</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-1</td>
+<td>Update</td>
+<td>Always follow the latest updates of remote communication channels.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<p>We will see the following parts:</p>
+<ul>
+<li>
+<p><a href="#wifi">Wifi</a></p>
+</li>
+<li>
+<p><a href="#bluetooth">Bluetooth</a></p>
+</li>
+<li>
+<p><a href="#cellular">Cellular</a></p>
+</li>
+<li>
+<p><a href="#radio">Radio</a></p>
+</li>
+<li>
+<p><a href="#nfc">NFC</a></p>
+</li>
+</ul>
+<!-- section-todo -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Improvement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-1</td>
+<td>Add communication channels (RFID, ZigBee?).</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-todo -->
+
+<hr />
+<p>For existing automotive-specific means, we take examples of existing system
+attacks from the <em>IOActive</em> document (<a href="https://www.ioactive.com/pdfs/IOActive_Remote_Attack_Surfaces.pdf">A Survey of Remote Automotive Attack
+Surfaces</a>)
+and from the ETH document (<a href="https://eprint.iacr.org/2010/332.pdf">Relay Attacks on Passive Keyless Entry and Start
+Systems in Modern Cars</a>).</p>
+<ul>
+<li>
+<p><a href="https://www.ioactive.com/pdfs/IOActive_Remote_Attack_Surfaces.pdf#%5B%7B%22num%22%3A40%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C60%2C720%2C0%5D">Telematics</a></p>
+</li>
+<li>
+<p><a href="https://www.ioactive.com/pdfs/IOActive_Remote_Attack_Surfaces.pdf#%5B%7B%22num%22%3A11%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C60%2C574%2C0%5D">Passive Anti-Theft System
+  (PATS)</a></p>
+</li>
+<li>
+<p><a href="https://www.ioactive.com/pdfs/IOActive_Remote_Attack_Surfaces.pdf#%5B%7B%22num%22%3A17%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C60%2C720%2C0%5D">Tire Pressure Monitoring System
+  (TPMS)</a></p>
+</li>
+<li>
+<p><a href="https://www.ioactive.com/pdfs/IOActive_Remote_Attack_Surfaces.pdf#%5B%7B%22num%22%3A26%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22XYZ%22%7D%2C60%2C720%2C0%5D">Remote Keyless Entry/Start
+  (RKE)</a></p>
+</li>
+<li>
+<p><a href="https://eprint.iacr.org/2010/332.pdf">Passive Keyless Entry (PKE)</a></p>
+</li>
+</ul>
+<hr />
+<!-- pagebreak -->
+
+<h2 id="wifi">Wifi</h2>
+<h3 id="attacks">Attacks</h3>
+<p>We can differentiate existing attacks on wifi in two categories: Those on
+<strong>WEP</strong> and those on <strong>WPA</strong>.</p>
+<ul>
+<li>
+<p><strong>WEP</strong> attacks:</p>
+</li>
+<li>
+<p><strong>FMS</strong>: (<strong>F</strong>luhrer, <strong>M</strong>antin and <strong>S</strong>hamir attack) is a "Stream cipher
+    attack on the widely used RC4 stream cipher. The attack allows an attacker
+    to recover the key in an RC4 encrypted stream from a large number of
+    messages in that stream."</p>
+</li>
+<li><strong>KoreK</strong>: "Allows the attacker to reduce the key space".</li>
+<li><strong>PTW</strong>: (<strong>P</strong>yshkin <strong>T</strong>ews <strong>W</strong>einmann attack).</li>
+<li><strong>Chopchop</strong>: Found by KoreK, "Weakness of the CRC32 checksum and the lack
+    of replay protection."</li>
+<li>
+<p><strong>Fragmentation</strong></p>
+</li>
+<li>
+<p><strong>WPA</strong> attacks:</p>
+</li>
+<li>
+<p><strong>Beck and Tews</strong>: Exploit weakness in <strong>TKIP</strong>. "Allow the attacker to
+    decrypt <strong>ARP</strong> packets and to inject traffic into a network, even allowing
+    him to perform a <strong>DoS</strong> or an <strong>ARP</strong> poisoning".</p>
+</li>
+<li><a href="https://github.com/kristate/krackinfo">KRACK</a>: (K)ey (R)einstallation
+    (A)tta(ck) (<a href="https://jira.automotivelinux.org/browse/SPEC-1017">jira AGL
+    SPEC-1017</a>).</li>
+</ul>
+<h3 id="recommendations">Recommendations</h3>
+<ul>
+<li>
+<p>Do not use <strong>WEP</strong>, <strong>PSK</strong> and <strong>TKIP</strong>.</p>
+</li>
+<li>
+<p>Use <strong>WPA2</strong> with <strong>CCMP</strong>.</p>
+</li>
+<li>
+<p>Should protect data sniffing.</p>
+</li>
+</ul>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Tech name or object</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-Wifi-1</td>
+<td>WEP, PSK, TKIP</td>
+<td>Disabled</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Wifi-2</td>
+<td>WPA2 and AES-CCMP</td>
+<td>Used</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Wifi-3</td>
+<td>WPA2</td>
+<td>Should protect data sniffing.</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Wifi-4</td>
+<td>PSK</td>
+<td>Changing regularly the password.</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Wifi-5</td>
+<td>Device</td>
+<td>Upgraded easily in software or firmware to have the last security update.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<p>See <a href="https://matthieu.io/dl/wifi-attacks-wep-wpa.pdf">Wifi attacks WEP WPA</a> and
+<a href="https://dl.aircrack-ng.org/breakingwepandwpa.pdf">Breaking wep and wpa (Beck and
+Tews)</a> for more information.</p>
+<hr />
+<!-- pagebreak -->
+
+<h2 id="bluetooth">Bluetooth</h2>
+<h3 id="attacks_1">Attacks</h3>
+<ul>
+<li><strong>Bluesnarfing</strong> attacks involve an attacker covertly gaining access to your
+  Bluetooth-enabled device for the purpose of retrieving information, including
+  addresses, calendar information or even the device's <strong>I</strong>nternational
+  <strong>M</strong>obile <strong>E</strong>quipment <strong>I</strong>dentity. With the <strong>IMEI</strong>, an attacker could
+  route your incoming calls to his cell phone.</li>
+<li><strong>Bluebugging</strong> is a form of Bluetooth attack often caused by a lack of
+  awareness. Similar to bluesnarfing, bluebugging accesses and uses all phone
+  features but is limited by the transmitting power of class 2 Bluetooth radios,
+  normally capping its range at 10-15 meters.</li>
+<li><strong>Bluejacking</strong> is the sending of unsolicited messages.</li>
+<li><strong>BLE</strong>: <strong>B</strong>luetooth <strong>L</strong>ow <strong>E</strong>nergy
+  <a href="https://www.usenix.org/system/files/conference/woot13/woot13-ryan.pdf">attacks</a>.</li>
+<li><strong>DoS</strong>: Drain a device's battery or temporarily paralyze the phone.</li>
+</ul>
+<h3 id="recommendations_1">Recommendations</h3>
+<ul>
+<li>Not allowing Bluetooth pairing attempts without the driver's first manually
+  placing the vehicle in pairing mode.</li>
+<li>Monitoring.</li>
+<li>Use <strong>BLE</strong> with caution.</li>
+<li>For v2.1 and later devices using <strong>S</strong>ecure <strong>S</strong>imple <strong>P</strong>airing (<strong>SSP</strong>),
+  avoid using the "Just Works" association model. The device must verify that an
+  authenticated link key was generated during pairing.</li>
+</ul>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Tech name</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-Bluetooth-1</td>
+<td>BLE</td>
+<td>Use with caution.</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Bluetooth-2</td>
+<td>Bluetooth</td>
+<td>Monitoring</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Bluetooth-3</td>
+<td>SSP</td>
+<td>Avoid using the "Just Works" association model.</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Bluetooth-4</td>
+<td>Visibility</td>
+<td>Configured by default as undiscoverable. Except when needed.</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Bluetooth-5</td>
+<td>Anti-scanning</td>
+<td>Used, inter alia, to slow down brute force attacks.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<p>See <a href="http://www.ti.com/lit/wp/sway008/sway008.pdf">Low energy and the automotive
+transformation</a>, <a href="http://gattack.io/whitepaper.pdf">Gattacking
+Bluetooth Smart Devices</a>, <a href="http://www.autosec.org/pubs/cars-usenixsec2011.pdf">Comprehensive
+Experimental Analyses of Automotive Attack
+Surfaces</a> and <a href="https://www.usenix.org/system/files/conference/woot13/woot13-ryan.pdf">With Low
+Energy comes Low
+Security</a>
+for more information.</p>
+<hr />
+<!-- pagebreak -->
+
+<h2 id="cellular">Cellular</h2>
+<h3 id="attacks_2">Attacks</h3>
+<ul>
+<li>
+<p><strong>IMSI-Catcher</strong>: Is a telephone eavesdropping device used for intercepting
+  mobile phone traffic and tracking location data of mobile phone users.
+  Essentially a "fake" mobile tower acting between the target mobile phone and
+  the service provider's real towers, it is considered a man-in-the-middle
+  (<strong>MITM</strong>) attack.</p>
+</li>
+<li>
+<p>Lack of mutual authentication (<strong>GPRS</strong>/<strong>EDGE</strong>) and encryption with
+  <strong>GEA0</strong>.</p>
+</li>
+<li>
+<p><strong>Fall back</strong> from <strong>UMTS</strong>/<strong>HSPA</strong> to <strong>GPRS</strong>/<strong>EDGE</strong> (Jamming against
+  <strong>UMTS</strong>/<strong>HSPA</strong>).</p>
+</li>
+<li>
+<p>4G <strong>DoS</strong> attack.</p>
+</li>
+</ul>
+<h3 id="recommendations_2">Recommendations</h3>
+<ul>
+<li>Check antenna legitimacy.</li>
+</ul>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Tech name</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-Cellular-1</td>
+<td>GPRS/EDGE</td>
+<td>Avoid</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-Cellular-2</td>
+<td>UMTS/HSPA</td>
+<td>Protected against Jamming.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<p>See <a href="https://media.blackhat.com/bh-dc-11/Perez-Pico/BlackHat_DC_2011_Perez-Pico_Mobile_Attacks-wp.pdf">A practical attack against GPRS/EDGE/UMTS/HSPA mobile data
+communications</a>
+for more information.</p>
+<hr />
+<h2 id="radio">Radio</h2>
+<h3 id="attacks_3">Attacks</h3>
+<ul>
+<li>Interception of data with low cost material (<strong>SDR</strong> with hijacked DVB-T/DAB
+  for example).</li>
+</ul>
+<h3 id="recommendations_3">Recommendations</h3>
+<ul>
+<li>Use the <strong>R</strong>adio <strong>D</strong>ata <strong>S</strong>ystem (<strong>RDS</strong>) only to send signals for audio
+  output and meta concerning radio.</li>
+</ul>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Tech name</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-Radio-1</td>
+<td>RDS</td>
+<td>Only audio output and meta concerning radio.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<hr />
+<!-- pagebreak -->
+
+<h2 id="nfc">NFC</h2>
+<h3 id="attacks_4">Attacks</h3>
+<ul>
+<li><strong>MITM</strong>: Relay and replay attack.</li>
+</ul>
+<h3 id="recommendations_4">Recommendations</h3>
+<ul>
+<li>Should implements protection against relay and replay attacks (Tokens,
+  etc...).</li>
+<li>Disable unneeded and unapproved services and profiles.</li>
+<li>NFC should be use encrypted link (secure channel). A standard key agreement
+  protocol like Diffie-Hellmann based on RSA or Elliptic Curves could be applied
+  to establish a shared secret between two devices.</li>
+<li>Automotive NFC device should be certified by NFC forum entity: The NFC Forum
+  Certification Mark shows that products meet global interoperability standards.</li>
+<li>NFC Modified Miller coding is preferred over NFC Manchester coding.</li>
+</ul>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Tech name</th>
+<th>Recommendations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Wireless-NFC-1</td>
+<td>NFC</td>
+<td>Protected against relay and replay attacks.</td>
+</tr>
+<tr>
+<td>Connectivity-Wireless-NFC-2</td>
+<td>Device</td>
+<td>Disable unneeded and unapproved services and profiles.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.7.3_Cloud/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.7.3_Cloud/" class="btn btn-xs btn-link">
+        Cloud
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-link">
+        Bus and connectors
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

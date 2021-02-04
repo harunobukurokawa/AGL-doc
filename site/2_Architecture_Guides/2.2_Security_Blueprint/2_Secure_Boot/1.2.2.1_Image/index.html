@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Shankho Boron Ghosh">
+    <link rel="canonical" href="http://docs.automotivelinux.org/2_Architecture_Guides/2.2_Security_Blueprint/2_Secure_Boot/1.2.2.1_Image/">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Image - AGL Documentation</title>
+    <link href="../../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Image", url: "#_top", children: [
+              {title: "Image selection", url: "#image-selection" },
+              {title: "Image authenticity", url: "#image-authenticity" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.2.2_Communication-modes/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.2.2_Communication-modes/" class="btn btn-xs btn-link">
+        Communication modes
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.2.0_Abstract/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.2.0_Abstract/" class="btn btn-xs btn-link">
+        Introduction
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="image">Image</h1>
+<h2 id="image-selection">Image selection</h2>
+<p>The boot process shall be uninterruptible and shall irrevocably boot the image
+as specified in the boot environment.</p>
+<p>In U-Boot set the "<em>bootdelay</em>" environment variable and/or define
+<code>CONFIG_BOOTDELAY</code> to <em>-2</em>.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><em>Variable</em> / <code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boot-Image-Selection-1</td>
+<td><code>CONFIG_BOOTDELAY</code></td>
+<td><code>-2</code></td>
+</tr>
+<tr>
+<td>Boot-Image-Selection-2</td>
+<td><em>bootdelay</em></td>
+<td><code>-2</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<hr />
+<h2 id="image-authenticity">Image authenticity</h2>
+<p>It shall not be possible to boot from an unverified image. The secure boot
+feature in U-Boot shall be enabled. The secure boot feature is available from
+U-Boot 2013.07 version. To enable the secure boot feature, enable the following
+features:</p>
+<div class="highlight"><pre><span></span><code>CONFIG_FIT: Enables support for Flat Image Tree (FIT) uImage format.
+CONFIG_FIT_SIGNATURE: Enables signature verification of FIT images.
+CONFIG_RSA: Enables RSA algorithm used for FIT image verification.
+CONFIG_OF_CONTROL: Enables Flattened Device Tree (FDT) configuration.
+CONFIG_OF_SEPARATE: Enables separate build of u-Boot from the device tree.
+CONFIG_DEFAULT_DEVICE_TREE: Specifies the default Device Tree used for the run-time configuration of U-Boot.
+</code></pre></div>
+<p>Generate the U-Boot image with public keys to validate and load the image. It
+shall use RSA2048 and SHA256 for authentication.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><em>State</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boot-Image-Authenticity-1</td>
+<td><code>CONFIG_FIT</code></td>
+<td><em>Enable</em></td>
+</tr>
+<tr>
+<td>Boot-Image-Authenticity-2</td>
+<td><code>CONFIG_FIT_SIGNATURE</code></td>
+<td><em>Enable</em></td>
+</tr>
+<tr>
+<td>Boot-Image-Authenticity-3</td>
+<td><code>CONFIG_RSA</code></td>
+<td><em>Enable</em></td>
+</tr>
+<tr>
+<td>Boot-Image-Authenticity-4</td>
+<td><code>CONFIG_OF_CONTROL</code></td>
+<td><em>Enable</em></td>
+</tr>
+<tr>
+<td>Boot-Image-Authenticity-5</td>
+<td><code>CONFIG_OF_SEPARATE</code></td>
+<td><em>Enable</em></td>
+</tr>
+<tr>
+<td>Boot-Image-Authenticity-6</td>
+<td><code>CONFIG_DEFAULT_DEVICE_TREE</code></td>
+<td><em>Enable</em></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.2.2_Communication-modes/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.2.2_Communication-modes/" class="btn btn-xs btn-link">
+        Communication modes
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.2.0_Abstract/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.2.0_Abstract/" class="btn btn-xs btn-link">
+        Introduction
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

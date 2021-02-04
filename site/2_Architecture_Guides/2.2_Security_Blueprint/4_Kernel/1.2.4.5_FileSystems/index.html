@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Shankho Boron Ghosh">
+    <link rel="canonical" href="http://docs.automotivelinux.org/2_Architecture_Guides/2.2_Security_Blueprint/4_Kernel/1.2.4.5_FileSystems/">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>File Systems - AGL Documentation</title>
+    <link href="../../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "File System", url: "#_top", children: [
+              {title: "Disable all file systems not needed", url: "#disable-all-file-systems-not-needed" },
+              {title: "Partition Mount Options", url: "#partition-mount-options" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../5_Platform/1.2.5.0_Abstract/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../5_Platform/1.2.5.0_Abstract/" class="btn btn-xs btn-link">
+        Introduction
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.4.4_Debug/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.4.4_Debug/" class="btn btn-xs btn-link">
+        Debug
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="file-system">File System</h1>
+<h2 id="disable-all-file-systems-not-needed">Disable all file systems not needed</h2>
+<p>To reduce the attack surface, file system data is parsed by the kernel, so any
+logic bugs in file system drivers can become kernel exploits.</p>
+<h3 id="disable-nfs-file-system">Disable NFS file system</h3>
+<p>NFS FileSystems are useful during development phases, but this can be a very
+helpful way for an attacker to get files when you are in production mode, so we
+must disable them.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-FileSystems-NFS-1</td>
+<td><code>CONFIG_NFSD</code></td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-NFS-2</td>
+<td><code>CONFIG_NFS_FS</code></td>
+<td><code>n</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<hr />
+<!-- pagebreak -->
+
+<h2 id="partition-mount-options">Partition Mount Options</h2>
+<p>There are several security restrictions that can be set on a filesystem when it
+is mounted. Some common security options include, but are not limited to:</p>
+<p><code>nosuid</code> - Do not allow set-user-identifier or set-group-identifier bits to take
+effect.</p>
+<p><code>nodev</code> - Do not interpret character or block special devices on the filesystem.</p>
+<p><code>noexec</code> - Do not allow execution of any binaries on the mounted filesystem.</p>
+<p><code>ro</code> - Mount filesystem as read-only.</p>
+<p>The following flags shall be used for mounting common filesystems:</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Partition</code></th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-FileSystems-Mount-1</td>
+<td><code>/boot</code></td>
+<td><code>nosuid</code>, <code>nodev</code> and <code>noexec</code>.</td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-Mount-2</td>
+<td><code>/var</code> &amp; <code>/tmp</code></td>
+<td>In <code>/etc/fstab</code> or <code>vfstab</code>, add <code>nosuid</code>, <code>nodev</code> and <code>noexec</code>.</td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-Mount-3</td>
+<td><em>Non-root local</em></td>
+<td>If type is <code>ext2</code> or <code>ext3</code> and mount point not '/', add <code>nodev</code>.</td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-Mount-4</td>
+<td><em>Removable storage</em></td>
+<td>Add <code>nosuid</code>, <code>nodev</code> and <code>noexec</code>.</td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-Mount-5</td>
+<td><em>Temporary storage</em></td>
+<td>Add <code>nosuid</code>, <code>nodev</code> and <code>noexec</code>.</td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-Mount-6</td>
+<td><code>/dev/shm</code></td>
+<td>Add <code>nosuid</code>, <code>nodev</code> and <code>noexec</code>.</td>
+</tr>
+<tr>
+<td>Kernel-FileSystems-Mount-7</td>
+<td><code>/dev</code></td>
+<td>Add <code>nosuid</code> and <code>noexec</code>.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+<p>If <code>CONFIG_DEVTMPFS_MOUNT</code> is set, then the kernel will mount /dev and will not
+apply the <code>nosuid</code>, <code>noexec</code> options. Either disable <code>CONFIG_DEVTMPFS_MOUNT</code> or
+add a remount with <code>noexec</code> and <code>nosuid</code> options to system startup.</p>
+<!-- end-section-note -->
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><em>State</em> or <code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-FileSystems-Mount-1</td>
+<td><code>CONFIG_DEVTMPFS_MOUNT</code></td>
+<td><em>Disabled</em> or add remount with <code>noexec</code> and <code>nosuid</code> to system startup.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<!-- section-note --><!-- section-config -->
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../5_Platform/1.2.5.0_Abstract/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../5_Platform/1.2.5.0_Abstract/" class="btn btn-xs btn-link">
+        Introduction
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.4.4_Debug/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.4.4_Debug/" class="btn btn-xs btn-link">
+        Debug
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Shankho Boron Ghosh">
+    <link rel="canonical" href="http://docs.automotivelinux.org/4_APIs_and_Services/4.1_API_Reference/0_api-introduction/">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>API Reference - AGL Documentation</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Available APIs", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../../5_How_To_Contribute/1_Getting_Linux_Foundation_account/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../../5_How_To_Contribute/1_Getting_Linux_Foundation_account/" class="btn btn-xs btn-link">
+        Getting Linux Foundation account
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../../3_Developer_Guides/1_AGL_Layers/4_meta-agl-devel/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../../3_Developer_Guides/1_AGL_Layers/4_meta-agl-devel/" class="btn btn-xs btn-link">
+        meta-agl-devel
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="available-apis">Available APIs</h1>
+<p>Introduction of Available APIs with categorization. If multiple categories apply, they will all be listed in the third column (e.g. first row in the following).</p>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>Description</th>
+<th>Profile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-audiomixer/about/">agl-service-audiomixer</a></td>
+<td>Audio Mixer API</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-bluetooth/about/">agl-service-bluetooth</a></td>
+<td>bluetooth binding</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-bluetooth-avrcp/">agl-service-bluetooth-avrcp</a></td>
+<td>AGL service that allow multimedia control over Bluetooth AVRCP profile</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-bluetooth-pbap/about/">agl-service-bluetooth-pbap</a></td>
+<td>Bluetooth Phone Book Access Protocoll service</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-can-low-level/about/">agl-service-can-low-level</a></td>
+<td>Low level CAN service made to decode and write on CAN bus.</td>
+<td>Instrument Cluster</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-data-persistence/about/">agl-service-data-persistence</a></td>
+<td>AGL binding for data persistence</td>
+<td>Instrument Cluster</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-geoclue/about/">agl-service-geoclue</a></td>
+<td>AGL Geoclue service to backup GPS positioning with network-based <br /> positioning</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-geofence/about/">agl-service-geofence</a></td>
+<td>AGL geofence binding to signal vehicle POI bounding box events</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-gps/about/">agl-service-gps</a></td>
+<td>GPS binding</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-gstreamer/">agl-service-gstreamer</a></td>
+<td>(deprecated) GStreamer binding for multimedia control and playback</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-harvester/about/">agl-service-harvester</a></td>
+<td>V2C interface that collect data to TimeSeries database</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-homescreen/about/">agl-service-homescreen</a></td>
+<td>Applications need a new binding to communicate with homescreen</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-homescreen-2017/about/">agl-service-homescreen-2017</a></td>
+<td>Binding for applications to communicate with the homescreen-2017</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-hvac/">agl-service-hvac</a></td>
+<td>Unnamed repository</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-identity-agent/about/">agl-service-identity-agent</a></td>
+<td>Identity Agent</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-iiodevices/about/">agl-service-iiodevices</a></td>
+<td>iiodevices support</td>
+<td>Telematics/Connectivity</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-mediaplayer/about/">agl-service-mediaplayer</a></td>
+<td>AGL Media Player service that allows applications to control <br /> playing media.</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-mediascanner/about/">agl-service-mediascanner</a></td>
+<td>AGL Media Scanning service that allows applications to detect <br /> and index media at...</td>
+<td>Telematics/Connectivity</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-navigation/">agl-service-navigation</a></td>
+<td>Navigation API with binding</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-network/about/">agl-service-network</a></td>
+<td>AGL Network service providing support for management of networking <br /> interfaces in...</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-nfc/about/">agl-service-nfc</a></td>
+<td>AGL service NFC binding</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-radio/about/">agl-service-radio</a></td>
+<td>radio binding</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-signal-composer/about/">agl-service-signal-composer</a></td>
+<td>AGL High Level Signaling service to handle CAN, LIN, and others <br /> signaling source...</td>
+<td>Instrument Cluster</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-soundmanager/about/">agl-service-soundmanager</a></td>
+<td>Binding for applications to communicate with the soundmanager</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-soundmanager-2017/about/">agl-service-soundmanager-2017</a></td>
+<td>Binding for applications to communicate with the soundmanager-2017</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-speech/about/">agl-service-speech</a></td>
+<td>AGL App Framework Binding for Speech Services</td>
+<td>Telematics/Connectivity</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-steering-wheel/about/">agl-service-steering-wheel</a></td>
+<td>And binding service for steering wheel demo</td>
+<td>Instrument Cluster</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-taskmanager/about/">agl-service-taskmanager</a></td>
+<td>Simple taskmanager service to retrieve data from procps</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-telephony/about/">agl-service-telephony</a></td>
+<td>Unnamed repository</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-unicens/about/">agl-service-unicens</a></td>
+<td>Infotainment network setup and access (using Unified Centralized <br /> Network Stack)</td>
+<td>Infotainment</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-weather/about/">agl-service-weather</a></td>
+<td>AGL binding that uses OpenWeathermap data to display current <br /> conditions on Homes...</td>
+<td>Telematics/Connectivity</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-wifi/">agl-service-wifi</a></td>
+<td>wifi binding</td>
+<td>Telematics/Connectivity</td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-windowmanager/about/">agl-service-windowmanager</a></td>
+<td>Binding for applications to communicate with the windowmanager</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-windowmanager-2017/about/">agl-service-windowmanager-2017</a></td>
+<td>Binding for applications to communicate with the windowmanager-2017</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-xds/">agl-service-xds</a></td>
+<td>AGL binding used to control collected data from AGL <br /> supervision. (empty)</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://git.automotivelinux.org/apps/agl-service-xds-monitoring/about/">agl-service-xds-monitoring</a></td>
+<td>UNDER DEVELOPMENT</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../../5_How_To_Contribute/1_Getting_Linux_Foundation_account/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../../5_How_To_Contribute/1_Getting_Linux_Foundation_account/" class="btn btn-xs btn-link">
+        Getting Linux Foundation account
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../../3_Developer_Guides/1_AGL_Layers/4_meta-agl-devel/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../../3_Developer_Guides/1_AGL_Layers/4_meta-agl-devel/" class="btn btn-xs btn-link">
+        meta-agl-devel
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

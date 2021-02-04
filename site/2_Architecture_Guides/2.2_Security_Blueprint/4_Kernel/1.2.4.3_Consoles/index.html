@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Shankho Boron Ghosh">
+    <link rel="canonical" href="http://docs.automotivelinux.org/2_Architecture_Guides/2.2_Security_Blueprint/4_Kernel/1.2.4.3_Consoles/">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Consoles - AGL Documentation</title>
+    <link href="../../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Serial", url: "#_top", children: [
+              {title: "Disable serial console", url: "#disable-serial-console" },
+              {title: "Bake-in the kernel command-line", url: "#bake-in-the-kernel-command-line" },
+              {title: "Disable KGDB", url: "#disable-kgdb" },
+              {title: "Disable magic sysrq support", url: "#disable-magic-sysrq-support" },
+              {title: "Disable support for binary formats other than ELF", url: "#disable-support-for-binary-formats-other-than-elf" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.4.4_Debug/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.4.4_Debug/" class="btn btn-xs btn-link">
+        Debug
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.4.2_Memory/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.4.2_Memory/" class="btn btn-xs btn-link">
+        Memory
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="serial">Serial</h1>
+<h2 id="disable-serial-console">Disable serial console</h2>
+<p>The serial console should be disabled to prevent an attacker from accessing this
+powerful interface.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-Consoles-Serial-1</td>
+<td><code>CONFIG_SERIAL_8250</code></td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td>Kernel-Consoles-Serial-2</td>
+<td><code>CONFIG_SERIAL_8250_CONSOLE</code></td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td>Kernel-Consoles-Serial-3</td>
+<td><code>CONFIG_SERIAL_CORE</code></td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td>Kernel-Consoles-Serial-4</td>
+<td><code>CONFIG_SERIAL_CORE_CONSOLE</code></td>
+<td><code>n</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<hr />
+<h2 id="bake-in-the-kernel-command-line">Bake-in the kernel command-line</h2>
+<p>The kernel command-line is used to control many aspects of the booting kernel,
+and is prone to tampering as they are passed in RAM with little to no reverse
+validation on these parameters. To prevent this type of attack, the kernel shall
+be configured to ignore commands line arguments, and use pre-configured (compile
+time) options instead.</p>
+<p>Set the kernel command line in the <code>CONFIG_CMDLINE KConfig</code> item and then pass
+no arguments from the bootloader.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-Consoles-CommandLine-1</td>
+<td><code>CONFIG_CMDLINE_BOOL</code></td>
+<td><code>y</code></td>
+</tr>
+<tr>
+<td>Kernel-Consoles-CommandLine-2</td>
+<td><code>CONFIG_CMDLINE</code></td>
+<td><code>"insert kernel command line here"</code></td>
+</tr>
+<tr>
+<td>Kernel-Consoles-CommandLine-3</td>
+<td><code>CONFIG_CMDLINE_OVERRIDE</code></td>
+<td><code>y</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<p>It is recommended that any per-device settings (e.g: MAC addresses, serial
+numbers, etc.) be stored and accessed from read-only memory (or files), and that
+any such parameters be verified (signature checking) prior to their use.</p>
+<hr />
+<h2 id="disable-kgdb">Disable KGDB</h2>
+<p>The Linux kernel supports KGDB over USB and console ports. These mechanisms are
+controlled by the <code>kgdbdbgp</code> and <code>kgdboc</code> kernel command-line parameters. It is
+important to ensure that no shipping product contains a kernel with KGDB
+compiled-in.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-Consoles-KDBG-1</td>
+<td><code>CONFIG_KGDB</code></td>
+<td><code>n</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<hr />
+<h2 id="disable-magic-sysrq-support">Disable magic sysrq support</h2>
+<p>On a few architectures, you can access a powerful debugger interface from the
+keyboard. The same powerful interface can be present on the serial console
+(responding to serial break) of Linux on other architectures. Disable to avoid
+potentially exposing this powerful backdoor.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-Consoles-SysRQ-1</td>
+<td><code>CONFIG_MAGIC_SYSRQ</code></td>
+<td><code>n</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+<hr />
+<h2 id="disable-support-for-binary-formats-other-than-elf">Disable support for binary formats other than ELF</h2>
+<p>This will make possible to plug wrapper-driven binary formats into the kernel.
+It enables support for binary formats other than ELF. Providing the ability to
+use alternate interpreters would assist an attacker in discovering attack
+vectors.</p>
+<!-- section-config -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th><code>Config</code> name</th>
+<th><code>Value</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel-Consoles-BinaryFormat-1</td>
+<td><code>CONFIG_BINFMT_MISC</code></td>
+<td><code>n</code></td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-config -->
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.4.4_Debug/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.4.4_Debug/" class="btn btn-xs btn-link">
+        Debug
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../1.2.4.2_Memory/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../1.2.4.2_Memory/" class="btn btn-xs btn-link">
+        Memory
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

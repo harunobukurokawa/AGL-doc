@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Shankho Boron Ghosh">
+    <link rel="canonical" href="http://docs.automotivelinux.org/2_Architecture_Guides/2.2_Security_Blueprint/7_Connectivity/1.2.7.0_Abstract/">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Introduction - AGL Documentation</title>
+    <link href="../../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Part 7 - Connectivity", url: "#_top", children: [
+              {title: "Abstract", url: "#abstract" },
+              {title: "Acronyms and Abbreviations", url: "#acronyms-and-abbreviations" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-link">
+        Bus and connectors
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../6_Application/1.2.6.4_Services/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../6_Application/1.2.6.4_Services/" class="btn btn-xs btn-link">
+        Services
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="part-7-connectivity">Part 7 - Connectivity</h1>
+<h2 id="abstract">Abstract</h2>
+<p>This part shows different Connectivity attacks on the car.</p>
+<!-- section-todo -->
+
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Improvement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connectivity-Abstract-1</td>
+<td>Improve abstract.</td>
+</tr>
+</tbody>
+</table>
+<!-- end-section-todo -->
+
+<hr />
+<!-- pagebreak -->
+
+<h2 id="acronyms-and-abbreviations">Acronyms and Abbreviations</h2>
+<p>The following table lists the terms utilized within this part of the document.</p>
+<table>
+<thead>
+<tr>
+<th>Acronyms or Abbreviations</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>ARP</em></td>
+<td><strong>A</strong>ddress <strong>R</strong>esolution <strong>P</strong>rotocol</td>
+</tr>
+<tr>
+<td><em>BLE</em></td>
+<td><strong>B</strong>luetooth <strong>L</strong>ow <strong>E</strong>nergy</td>
+</tr>
+<tr>
+<td><em>CAN</em></td>
+<td><strong>C</strong>ar <strong>A</strong>rea <strong>N</strong>etwork</td>
+</tr>
+<tr>
+<td><em>CCMP</em></td>
+<td><strong>C</strong>ounter-Mode/<strong>C</strong>BC-<strong>M</strong>ac <strong>P</strong>rotocol</td>
+</tr>
+<tr>
+<td><em>EDGE</em></td>
+<td><strong>E</strong>nhanced <strong>D</strong>ata <strong>R</strong>ates for <strong>GSM</strong> <strong>E</strong>volution - Evolution of <strong>GPRS</strong></td>
+</tr>
+<tr>
+<td><em>GEA</em></td>
+<td><strong>G</strong>PRS <strong>E</strong>ncryption <strong>A</strong>lgorithm</td>
+</tr>
+<tr>
+<td><em>GPRS</em></td>
+<td><strong>G</strong>eneral <strong>P</strong>acket <strong>R</strong>adio <strong>S</strong>ervice (2,5G, 2G+)</td>
+</tr>
+<tr>
+<td><em>GSM</em></td>
+<td><strong>G</strong>lobal <strong>S</strong>ystem for <strong>M</strong>obile Communications (2G)</td>
+</tr>
+<tr>
+<td><em>HSPA</em></td>
+<td><strong>H</strong>igh <strong>S</strong>peed <strong>P</strong>acket <strong>A</strong>ccess (3G+)</td>
+</tr>
+<tr>
+<td><em>IMEI</em></td>
+<td><strong>I</strong>nternational <strong>M</strong>obile <strong>E</strong>quipment <strong>I</strong>dentity</td>
+</tr>
+<tr>
+<td><em>LIN</em></td>
+<td><strong>L</strong>ocal <strong>I</strong>nterconnect <strong>N</strong>etwork</td>
+</tr>
+<tr>
+<td><em>MOST</em></td>
+<td><strong>M</strong>edia <strong>O</strong>riented <strong>S</strong>ystem <strong>T</strong>ransport</td>
+</tr>
+<tr>
+<td><em>NFC</em></td>
+<td><strong>N</strong>ear <strong>F</strong>ield <strong>C</strong>ommunication</td>
+</tr>
+<tr>
+<td><em>OBD</em></td>
+<td><strong>O</strong>n-<strong>B</strong>oard <strong>D</strong>iagnostics</td>
+</tr>
+<tr>
+<td><em>PATS</em></td>
+<td><strong>P</strong>assive <strong>A</strong>nti-<strong>T</strong>heft <strong>S</strong>ystem</td>
+</tr>
+<tr>
+<td><em>PKE</em></td>
+<td><strong>P</strong>assive <strong>K</strong>eyless <strong>E</strong>ntry</td>
+</tr>
+<tr>
+<td><em>PSK</em></td>
+<td><strong>P</strong>hase-<strong>S</strong>hift <strong>K</strong>eying</td>
+</tr>
+<tr>
+<td><em>RDS</em></td>
+<td><strong>R</strong>adio <strong>D</strong>ata <strong>S</strong>ystem</td>
+</tr>
+<tr>
+<td><em>RFID</em></td>
+<td><strong>R</strong>adio <strong>F</strong>requency <strong>I</strong>dentification</td>
+</tr>
+<tr>
+<td><em>RKE</em></td>
+<td><strong>R</strong>emote <strong>K</strong>eyless <strong>E</strong>ntry</td>
+</tr>
+<tr>
+<td><em>SDR</em></td>
+<td><strong>S</strong>oftware <strong>D</strong>efined <strong>R</strong>adio</td>
+</tr>
+<tr>
+<td><em>SSP</em></td>
+<td><strong>S</strong>ecure <strong>S</strong>imple <strong>P</strong>airing</td>
+</tr>
+<tr>
+<td><em>TKIP</em></td>
+<td><strong>T</strong>emporal <strong>K</strong>ey <strong>I</strong>ntegrity <strong>P</strong>rotocol</td>
+</tr>
+<tr>
+<td><em>TPMS</em></td>
+<td><strong>T</strong>ire <strong>P</strong>ressure <strong>M</strong>onitoring <strong>S</strong>ystem</td>
+</tr>
+<tr>
+<td><em>UMTS</em></td>
+<td><strong>U</strong>niversal <strong>M</strong>obile <strong>T</strong>elecommunications <strong>S</strong>ystem (3G)</td>
+</tr>
+<tr>
+<td><em>USB</em></td>
+<td><strong>U</strong>niversal <strong>S</strong>erial <strong>B</strong>us</td>
+</tr>
+<tr>
+<td><em>WEP</em></td>
+<td><strong>W</strong>ired <strong>E</strong>quivalent <strong>P</strong>rivacy</td>
+</tr>
+<tr>
+<td><em>WPA</em></td>
+<td><strong>W</strong>ifi <strong>P</strong>rotected <strong>A</strong>ccess</td>
+</tr>
+</tbody>
+</table>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../1.2.7.1_Bus_And_Connectors/" class="btn btn-xs btn-link">
+        Bus and connectors
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../6_Application/1.2.6.4_Services/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../6_Application/1.2.6.4_Services/" class="btn btn-xs btn-link">
+        Services
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
