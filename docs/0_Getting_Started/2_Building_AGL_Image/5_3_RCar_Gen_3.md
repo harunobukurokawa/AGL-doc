@@ -903,9 +903,6 @@ Multimedia portions depend on GLES portions.
     " vp8enc_lib"        - for OMX Media Component VP8 Encoder Library for Linux
     " vp9dec_lib"        - for OMX Media Component VP9 Decoder Library for Linux
     " aaclcenc_mdw"      - for AAC-LC Encoder Middleware for Linux
-    " cmsbcm"            - for CMS Basic Color Management Middleware for Linux
-    " cmsblc"            - for CMS CMM3 Backlight Control Middleware for Linux
-    " cmsdgc"            - for CMS VSP2 Dynamic Gamma Correction Middleware for Linux
     " dtv"               - for ISDB-T DTV Software Package for Linux
     " dvd"               - for DVD Core-Middleware for Linux
     " adsp"              - for ADSP driver, ADSP interface and ADSP framework for Linux
