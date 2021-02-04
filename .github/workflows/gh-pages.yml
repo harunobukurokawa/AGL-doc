@@ -25,5 +25,5 @@ jobs:
           # external_repository: github-user-name/github-repository-name
           # publish_branch を指定しない場合、
           # gh-pages ブランチにデプロイされます。
-          # publish_branch: gh-pages
-          publish_dir: ./site
+          publish_branch: gh-pages
+          publish_dir: ./
