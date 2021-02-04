@@ -892,10 +892,6 @@ Multimedia portions depend on GLES portions.
     " aaclcdec_mdw"      - for AAC-LC 2ch Decoder Middleware for Linux
     " aacpv2dec_lib"     - for OMX Media Component aacPlus V2 Decoder Library
     " aacpv2dec_mdw"     - for aacPlus V2 Decoder Middleware for Linux
-    " mp3dec_lib"        - for OMX Media Component MP3 Decoder Library
-    " mp3dec_mdw"        - for MP3 Decoder Middleware for Linux
-    " wmadec_lib"        - for OMX Media Component WMA Standard Decoder Library
-    " wmadec_mdw"        - for WMA Standard Decoder Middleware for Linux
     " dddec_lib"         - for OMX Media Component Dolby(R) Digital Decoder Library
     " dddec_mdw"         - for Dolby(R) Digital Decoder Middleware for Linux
     " aaclcenc_lib"      - for OMX Media Component AAC-LC Encoder Library
